@@ -53,7 +53,7 @@ console.log(linearSearch([100], 200)); //-1
 //BINARY SEARCH
 	//Much faster form of search
 	//Rather than eliminating one element at a time, you can elminate half the remaining elements at a time
-	//Binary search ONLY WORKS ON SORTED ARRAYS
+	// +++ONLY WORKS ON SORTED ARRAYS +++
 
 //Divide and Conquer
 	//Let's Search for 15;
@@ -70,11 +70,11 @@ console.log(linearSearch([100], 200)); //-1
 	//If you never find the value, return -1;
 
 function binarySearch(arr, value){
-	const len = arr.length-1;
+	const len = arr.length - 1;
 	let left = 0;
 	let right = len;
 	while ( arr[left] <  arr[right] ) {
-		let middle =arr[Math.floor(len / 2)];
+		let middle = arr[Math.floor(len / 2)];
 		if ( value !== middle ) {
 		    if (value < middle) {
 		        left ++;
@@ -97,5 +97,101 @@ console.log(binarySearch([5,6,10,13,14,18,30,34,35,37,40,44,64,79,84,86,95,98,99
 console.log(binarySearch([5,6,10,13,14,18,30,34,35,37,40,44,64,79,84,86,95,98,99], 100)); //-1
 
 
+//=============Logarithm Review=============
+	// log2(8) = 3 ====> 2^3 = 8
+	// log2(value) = exponent ====> 2^exponent = value
+		// we'll omit the 2
+		// log === log2
 
+	//The logarithm of a number roughly measures the number of times you can divide that number 
+	//by 2 before you get a value taht's less than or equal to 1.
 
+	//Logarithm Examples:
+		//  8 / 2 === 4
+		//  4 / 2 === 2
+		//  2 / 2 === 1
+		// log(8) = 3
+
+	//Logarithmic Time Complexity is GREAT!
+		//It's just a little bit slower than O(1)
+
+	//Logarithmic Time/Space Complexity is IMPORTANT b/c:
+		// Certain searching algorithms have logarithmic time complexity.
+		// Efficient sorting algorithms involve logarithms.
+		// Recursion sometimes involves logarithmic space complexity
+//=============Logarithm Review=============
+
+//BINARY SEARCH BIG 0
+
+//TIME COMPLEXITY -
+	//worst and average case: O(log N)
+	//best case: O(1) (constant)
+
+//Suppose we're searching for 13
+	[2,4,5,9,11,14,19,21,25,28,30,50,52,60,63];
+   //S 			    M 						E
+   		//13 is < 19 so we look at the first half of the arr
+   	[2,4,5,9,11,14,15];
+   //S     M 		E
+   		// 13 is > 9 so we look at the second half of the arr
+   [11,14,15];
+  //S  M  E
+  		// 14 is > 13 so we look at the first half of the arr
+  	[11];
+  		// 11 is all that's left; 11 !== 13 ==> NOT FOUND IN ARR
+
+	//16 elements = 4 "steps" to say with certainty that en elemnt is not found in the arr\
+
+//To add another "step", we need to double the number of elements --- let's search for 32
+//	[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32,35]
+   //S 										M 												 E
+//	[17,18,19,20,21,22,23,24,25,26,27,28,29,30,32,35]
+  //S 					  M 					  E
+//  	[25,26,27,28,29,30,32,35]
+ //  S 		  M 		   E
+// 	[29,30,32,35]
+ //	 S  M     E
+// 	[32,35]
+ 	// 32 elements = 5 "steps" (worst case)
+ 	// Olog(N) ===> 2 to what power === N?
+
+// ============ Naive String Search Exercise ============
+	//Suppose you want to count the number of times a smaller string sppears in a longer string
+	'wowomgzomg'
+	//Long String
+	'omg'
+	//Short String
+		//We would set up a counter to increment each time the substring appears in the longer string
+
+//Naive String Search Pseudocode
+	// Loop over the longer string (function stringSearch(){}
+	// Loop over the shorter string
+	// If the characters don't match, break out of the inner loop
+	// If the characters do match, keep going
+	// If you complete the inner loop and find a match, increment the count of matches
+	// Return the count
+
+// ============ Naive String Search Exercise ============
+//instructor's solution
+function naiveSearch(LS, SS){
+	let count = 0;
+	for (let i = 0; i < LS.length; i++) {
+		for (let j = 0; j < SS.length; j++) {
+			console.log((LS[i], SS[j]));
+			if (SS[j] !== LS[i + j]) {
+				console.log('BREAK!');
+				break;
+			}
+			if ( j === SS.length - 1 ) {
+				count ++;
+			}
+		}
+	}
+	console.log("FOUND ONE!");
+	return count;
+}
+
+console.log(naiveSearch('lorie loled', 'lol'));
+
+console.log(naiveSearch('lorie loled', 'lo'));
+//YOU FORGOT TO ATTEMPT THIS PROBLEM ON YOUR OWN, THE ABOVE SOLUTION IS FROM THE INSTRUCTOR
